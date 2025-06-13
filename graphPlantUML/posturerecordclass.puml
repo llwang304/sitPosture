@@ -1,0 +1,42 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype orthos
+
+' 实体类：PostureRecord
+class PostureRecord {
+  - userId: str
+  - timestamp: datetime
+  - head: str
+  - torso: str
+  - leg: str
+  - overall: str
+}
+
+' 仓储层：PostureRecordRepo
+class PostureRecordRepo {
+  + findByUserAndTimeRange(userId, start, end): List<PostureRecord>
+  + insert(record: PostureRecord): void
+}
+
+' 业务逻辑层：PostureMonitorService
+class PostureMonitorService {
+  - repo: PostureRecordRepo
+  + addLandmarks(userId, landmarks): void
+  + analyzeWindow(userId): PostureState
+  + getLatestPostureState(userId): PostureState
+  + getPostureReport(userId, start, end): PostureReport
+}
+
+' 控制器层：PostureController
+class PostureController {
+  + onPoseLandmarks(data): void
+  + getPostureReport(userId, start, end): PostureReport
+}
+
+' 关系
+PostureMonitorService --> PostureRecordRepo : uses >
+PostureController --> PostureMonitorService : calls >
+
+PostureRecordRepo --> PostureRecord : queries/saves >
+
+@enduml

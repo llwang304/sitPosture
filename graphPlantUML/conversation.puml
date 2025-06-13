@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant ChatPage as Frontend
+participant ConversationController as Controller
+participant ConversationService as Service
+participant Repo as Repository
+database MongoDB
+
+User -> Frontend: 触发操作（新建/删除/重命名/获取记录/追加）
+Frontend -> Controller: 发送对应API请求
+Controller -> Service: 调用对应服务方法
+Service -> Repository: 调用对应数据访问方法
+Repository -> MongoDB: 读写数据
+MongoDB --> Repository: 返回结果
+Repository --> Service: 返回数据
+Service --> Controller: 返回结果
+Controller --> Frontend: 返回响应
+Frontend --> User: 展示结果
+@enduml

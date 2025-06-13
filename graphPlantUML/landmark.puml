@@ -1,0 +1,34 @@
+@startuml
+actor User
+participant MonitorPage
+participant Controller
+participant PostureMonitorService as Service
+participant PostureRepo as Repo
+database "MongoDB\n(PostureRecords/Alert)" as DB
+User -> MonitorPage: 点击开启摄像头
+activate MonitorPage
+MonitorPage -> Controller: sendData()
+activate Controller
+Controller -> Service: handle_pose()
+activate Service
+Service -> Repo: analyze_window()
+activate Repo
+
+Repo -> DB: insert_posture_record()
+activate DB
+alt 报警状态发生变化
+    Repo -> DB: insert_alert()
+    activate DB
+    DB --> Repo: 插入成功
+    deactivate DB
+end
+DB->Repo: 插入成功
+Repo --> Service: 插入成功
+deactivate Repo
+Service -> Controller: get_latest_posture_state()
+deactivate Service
+Controller --> MonitorPage: PostureState
+deactivate Controller
+MonitorPage->User:result
+deactivate MonitorPage
+@enduml

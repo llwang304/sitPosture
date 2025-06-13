@@ -1,0 +1,23 @@
+@startuml
+actor User
+participant ChatPage as Frontend
+
+participant ConversationController as Controller
+participant "Agent" as AIAgent
+database Database
+
+User -> Frontend: 发送消息
+Frontend -> Controller: 触发receiveUserMessage事件\n携带消息内容
+
+
+Controller -> Controller: 获取session中的phone
+Controller -> AIAgent: get_agent_response(user_message)
+AIAgent --> Controller: 返回回复文本
+
+Controller -> Database: append_messages_to_conversation(phone, conversation_id, new_messages)
+Database --> Controller: 存储成功
+
+Controller -> Frontend: 推送回复消息chat_response
+Frontend -> User: 显示回复内容
+
+@enduml

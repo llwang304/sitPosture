@@ -1,0 +1,32 @@
+# Python
+backend/__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+.env
+
+# Node.js / Vue 项目
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env
+
+# Jupyter Notebook 或实验缓存
+final_exp/__pycache__/
+final_exp/*.pyc
+final_exp/.ipynb_checkpoints/
+*.log
+
+# VSCode配置
+.vscode/
+.idea/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 文件夹
+final_exp/

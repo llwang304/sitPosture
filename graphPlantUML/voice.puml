@@ -1,0 +1,25 @@
+@startuml
+actor System
+participant VoiceService
+participant PostureMonitorService as MonitorService
+participant TTSService
+participant MonitorPage
+
+System -> VoiceService: 定时器触发（周期执行）
+activate VoiceService
+
+VoiceService -> MonitorService: generate_monitor_advice()
+activate MonitorService
+MonitorService --> VoiceService: 返回语音文本
+deactivate MonitorService
+
+VoiceService -> TTSService: 请求合成语音（文本->音频）
+activate TTSService
+TTSService --> VoiceService: 返回音频数据
+deactivate TTSService
+
+VoiceService -> MonitorPage: 发送音频数据process_audio()
+deactivate VoiceService
+
+MonitorPage -> User: 播放音频提示
+@enduml

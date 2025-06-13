@@ -1,0 +1,17 @@
+@startuml
+actor User
+participant "Health Assistant" as API
+database "MongoDB\n(posture_records)" as DB
+
+User -> API : 请求生成坐姿报告(userId, start, end)
+activate API
+
+API -> DB : 查询 posture_records\n(user_id, timestamp ∈ [start, end])
+activate DB
+DB --> API : 返回记录数组
+deactivate DB
+
+API -> API : 遍历 records\n统计每个状态的持续时间
+API --> User : 返回 records + stats
+deactivate API
+@enduml

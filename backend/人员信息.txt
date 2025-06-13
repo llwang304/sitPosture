@@ -1,0 +1,50 @@
+# 模拟用户数据库，以电话号码作为键
+users = {
+    '13800138000': {
+        'password': 'password1',
+        'avatar': "http://localhost:8000/user1.jpg",
+        'username': '菜菜',
+        "isMicMuted": True,
+        "isVolumeMuted": False,
+        'info': {
+            "name": "张三",
+            "gender": "男",
+            "birthday": "1995-06-15",
+            "age": 28,
+            "height": 175,
+            "weight": 70,
+            "occupation": "工程师",
+            "spineHealth": "良好",
+            "exerciseHabit": "每周3次慢跑，健身房上肢练习",
+            "sittingStyle": "直立",
+            "sittingTime": 6,
+
+            "healthGoal": "改善坐姿",
+            "reminderFrequency": "每小时",
+            "otherInfo": "希望能带来一些关于按摩的知识。"
+        }
+    },
+    '13900139000': {
+        'password': 'password2',
+        'avatar': 'http://localhost:8000/user1.jpg',
+        'username': 'user2',
+        "isMicMuted": False,
+        "isVolumeMuted": False,
+        'info': {
+            "name": "李四",
+            "gender": "女",
+            "birthday": "1992-02-18",
+            "age": 33,
+            "height": 160,
+            "weight": 55,
+            "occupation": "设计师",
+            "spineHealth": "一般",
+            "exerciseHabit": "偶尔跑步",
+            "sittingStyle": "弯曲",
+            "sittingTime": 5,
+            "healthGoal": "改善坐姿",
+            "reminderFrequency": "每2小时",
+            "otherInfo": "没有"
+        }
+    }
+}

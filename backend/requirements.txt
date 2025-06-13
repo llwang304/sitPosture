@@ -1,0 +1,9 @@
+conda install flask-sqlalchemy
+conda install conda-forge::pymysql
+conda install conda-forge::langchain-community
+conda install conda-forge::docx2txt
+pip install pymupdf
+conda install conda-forge::faiss-cpu
+pip install sentence-transformers
+conda install conda-forge::langchain-google-genai
+conda install anaconda::pymongo

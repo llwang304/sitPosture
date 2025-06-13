@@ -1,0 +1,29 @@
+@startuml
+actor User
+participant StatPage as Page
+participant Controller
+participant PostureMonitorService as Service
+participant PostureRepo as Repo
+database "MongoDB\n(PostureRecords/Alert)" as DB
+User -> Page: 选择开始日期和结束日期
+activate Page
+Page -> Controller: sendDateRange()
+activate Controller
+Controller -> Service: get_posture_report()
+activate Service
+Service -> Repo: get_posture_report()
+activate Repo
+
+
+Repo -> DB: find_by_time_range()
+activate DB
+DB->Repo: 查询成功,record
+Repo --> Service: 查询成功,record
+deactivate Repo
+Service -> Controller: 报告信息PostureReport
+deactivate Service
+Controller --> Page: 报告信息PostureReport
+deactivate Controller
+Page->User:result
+deactivate Page
+@enduml
